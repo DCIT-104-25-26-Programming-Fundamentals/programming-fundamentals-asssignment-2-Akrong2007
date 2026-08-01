@@ -119,3 +119,38 @@ void deleteTask(vector<string>& tasks) {
     tasks.erase(tasks.begin() + (num - 1));
     cout << "Task \"" << removed << "\" has been removed." << endl;
 }
+int main() {
+    vector<string> tasks;
+    int choice;
+
+    do {
+        cout << "\n============================" << endl;
+        cout << "     TO-DO LIST MENU" << endl;
+        cout << "============================" << endl;
+        cout << "1. Add task" << endl;
+        cout << "2. View tasks" << endl;
+        cout << "3. Delete task" << endl;
+        cout << "4. Quit" << endl;
+        cout << "Enter your choice (1-4): ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addTask(tasks);
+                break;
+            case 2:
+                viewTasks(tasks);
+                break;
+            case 3:
+                deleteTask(tasks);
+                break;
+            case 4:
+                cout << "Goodbye!" << endl;
+                break;
+            default:
+                cout << "Error: Invalid choice. Please enter 1-4." << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
