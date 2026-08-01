@@ -76,3 +76,27 @@ bool isFibonacci(int num) {
     return a == num;
 }
 
+int main() {
+    int n;
+    cout << "How many terms? ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+        return 0;
+    }
+
+    printFibonacci(n);
+
+    int num;
+    cout << "Enter a number to check: ";
+    cin >> num;
+
+    if (isFibonacci(num)) {
+        cout << num << " is a Fibonacci number." << endl;
+    } else {
+        cout << num << " is NOT a Fibonacci number." << endl;
+    }
+
+    return 0;
+}
