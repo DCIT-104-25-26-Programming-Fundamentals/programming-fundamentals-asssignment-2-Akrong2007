@@ -65,25 +65,25 @@
 #include <string>
 using namespace std;
 
-void readMatrix(int mat[10][10], int rows, int cols) {
+void readMatrix(int mat[MAX_SIZE][MAX_SIZE], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            cout << "Enter element [" << i << "][" << j << "]: ";
-            cin >> mat[i][j];
+            printf("Enter element [%d][%d]: ", i, j);
+            scanf("%d", &mat[i][j]);
         }
     }
 }
 
-void printMatrix(int mat[10][10], int rows, int cols) {
+void printMatrix(int mat[MAX_SIZE][MAX_SIZE], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            cout << setw(5) << mat[i][j];
+            printf("%5d", mat[i][j]);
         }
-        cout << endl;
+        printf("\n");
     }
 }
 
-void transposeMatrix(int mat[10][10], int rows, int cols, int result[10][10]) {
+void transposeMatrix(int mat[MAX_SIZE][MAX_SIZE], int rows, int cols, int result[MAX_SIZE][MAX_SIZE]) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             result[j][i] = mat[i][j];
@@ -91,7 +91,7 @@ void transposeMatrix(int mat[10][10], int rows, int cols, int result[10][10]) {
     }
 }
 
-void addMatrices(int a[10][10], int b[10][10], int rows, int cols, int result[10][10]) {
+void addMatrices(int a[MAX_SIZE][MAX_SIZE], int b[MAX_SIZE][MAX_SIZE], int rows, int cols, int result[MAX_SIZE][MAX_SIZE]) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             result[i][j] = a[i][j] + b[i][j];
@@ -99,7 +99,7 @@ void addMatrices(int a[10][10], int b[10][10], int rows, int cols, int result[10
     }
 }
 
-void multiplyMatrices(int a[10][10], int b[10][10], int rowsA, int colsA, int colsB, int result[10][10]) {
+void multiplyMatrices(int a[MAX_SIZE][MAX_SIZE], int b[MAX_SIZE][MAX_SIZE], int rowsA, int colsA, int colsB, int result[MAX_SIZE][MAX_SIZE]) {
     for (int i = 0; i < rowsA; i++) {
         for (int j = 0; j < colsB; j++) {
             result[i][j] = 0;
@@ -112,53 +112,60 @@ void multiplyMatrices(int a[10][10], int b[10][10], int rowsA, int colsA, int co
 
 int main() {
     int rowsA, colsA;
-    cout << "Enter number of rows: ";
-    cin >> rowsA;
-    cout << "Enter number of columns: ";
-    cin >> colsA;
+    printf("Enter number of rows: ");
+    scanf("%d", &rowsA);
+    printf("Enter number of columns: ");
+    scanf("%d", &colsA);
 
-    int matrixA[10][10];
-    cout << "\nEnter Matrix A:" << endl;
-    readMatrix(matrixA, rowsA, colsA);
-
-    cout << "\nOriginal Matrix:" << endl;
-    printMatrix(matrixA, rowsA, colsA);
-
-    // Part A: Transpose
-    int transposed[10][10];
-    transposeMatrix(matrixA, rowsA, colsA, transposed);
-    cout << "\nTransposed Matrix:" << endl;
-    printMatrix(transposed, colsA, rowsA);
-
-    // Part B: Add two matrices
-    int matrixB[10][10];
-    cout << "\nEnter Matrix B (same size as A):" << endl;
-    readMatrix(matrixB, rowsA, colsA);
-
-    int sumResult[10][10];
-    addMatrices(matrixA, matrixB, rowsA, colsA, sumResult);
-    cout << "\nSum of Matrix A and B:" << endl;
-    printMatrix(sumResult, rowsA, colsA);
-
-    // Part C: Multiply two matrices
-    int rowsC, colsC;
-    cout << "\nEnter number of rows for Matrix C: ";
-    cin >> rowsC;
-    cout << "Enter number of columns for Matrix C: ";
-    cin >> colsC;
-
-    if (rowsC != colsA) {
-        cout << "Error: Number of columns in A must equal number of rows in C." << endl;
+    if (rowsA < 1 || rowsA > MAX_SIZE || colsA < 1 || colsA > MAX_SIZE) {
+        printf("Error: Matrix dimensions must be between 1 and %d.\n", MAX_SIZE);
         return 0;
     }
 
-    int matrixC[10][10];
-    cout << "\nEnter Matrix C:" << endl;
+    int matrixA[MAX_SIZE][MAX_SIZE];
+    printf("\nEnter Matrix A:\n");
+    readMatrix(matrixA, rowsA, colsA);
+
+    printf("\nOriginal Matrix:\n");
+    printMatrix(matrixA, rowsA, colsA);
+
+    int transposed[MAX_SIZE][MAX_SIZE];
+    transposeMatrix(matrixA, rowsA, colsA, transposed);
+    printf("\nTransposed Matrix:\n");
+    printMatrix(transposed, colsA, rowsA);
+
+    int matrixB[MAX_SIZE][MAX_SIZE];
+    printf("\nEnter Matrix B (same size as A):\n");
+    readMatrix(matrixB, rowsA, colsA);
+
+    int sumResult[MAX_SIZE][MAX_SIZE];
+    addMatrices(matrixA, matrixB, rowsA, colsA, sumResult);
+    printf("\nSum of Matrix A and B:\n");
+    printMatrix(sumResult, rowsA, colsA);
+
+    int rowsC, colsC;
+    printf("\nEnter number of rows for Matrix C: ");
+    scanf("%d", &rowsC);
+    printf("Enter number of columns for Matrix C: ");
+    scanf("%d", &colsC);
+
+    if (rowsC < 1 || rowsC > MAX_SIZE || colsC < 1 || colsC > MAX_SIZE) {
+        printf("Error: Matrix dimensions must be between 1 and %d.\n", MAX_SIZE);
+        return 0;
+    }
+
+    if (rowsC != colsA) {
+        printf("Error: Number of columns in A must equal number of rows in C.\n");
+        return 0;
+    }
+
+    int matrixC[MAX_SIZE][MAX_SIZE];
+    printf("\nEnter Matrix C:\n");
     readMatrix(matrixC, rowsC, colsC);
 
-    int productResult[10][10];
+    int productResult[MAX_SIZE][MAX_SIZE];
     multiplyMatrices(matrixA, matrixC, rowsA, colsA, colsC, productResult);
-    cout << "\nProduct of Matrix A and C:" << endl;
+    printf("\nProduct of Matrix A and C:\n");
     printMatrix(productResult, rowsA, colsC);
 
     return 0;
