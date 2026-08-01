@@ -57,3 +57,16 @@
 #include <iostream>
 using namespace std;
 
+void printSingleTable(int num) {
+    cout << "Multiplication Table for " << num << ":" << endl;
+    for (int i = 1; i <= 12; i++) {
+        cout << num << "  x  " << i << "  =  " << (num * i) << endl;
+    }
+}
+
+void printTablesUpToN(int n) {
+    for (int num = 1; num <= n; num++) {
+        printSingleTable(num);
+        cout << "---------------------------" << endl;
+    }
+}
