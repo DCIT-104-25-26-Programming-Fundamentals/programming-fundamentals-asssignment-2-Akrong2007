@@ -94,7 +94,7 @@ double divide(double a, double b, bool& error) {
     return a / b;
 }
 
-double modulus(int a, int b, bool& error) {
+double computeModulus(int a, int b, bool& error) {
     if (b == 0) {
         error = true;
         return 0;
@@ -175,7 +175,7 @@ int main() {
                 break;
             }
             case 5: {
-                double result = modulus((int)num1, (int)num2, error);
+                double result = computeModulus((int)num1, (int)num2, error);
                 if (error) {
                     cout << "Error: Cannot divide by zero." << endl;
                 } else {
