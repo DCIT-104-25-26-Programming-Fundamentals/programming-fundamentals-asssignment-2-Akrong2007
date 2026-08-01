@@ -73,3 +73,40 @@
 #include <cmath>
 using namespace std;
 
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b, bool& error) {
+    if (b == 0) {
+        error = true;
+        return 0;
+    }
+    error = false;
+    return a / b;
+}
+
+double modulus(int a, int b, bool& error) {
+    if (b == 0) {
+        error = true;
+        return 0;
+    }
+    error = false;
+    return a % b;
+}
+
+double exponent(double base, int exp) {
+    double result = 1;
+    for (int i = 0; i < exp; i++) {
+        result *= base;
+    }
+    return result;
+}
