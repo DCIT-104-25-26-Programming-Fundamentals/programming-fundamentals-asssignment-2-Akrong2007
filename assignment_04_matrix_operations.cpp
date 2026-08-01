@@ -109,3 +109,57 @@ void multiplyMatrices(int a[10][10], int b[10][10], int rowsA, int colsA, int co
         }
     }
 }
+
+int main() {
+    int rowsA, colsA;
+    cout << "Enter number of rows: ";
+    cin >> rowsA;
+    cout << "Enter number of columns: ";
+    cin >> colsA;
+
+    int matrixA[10][10];
+    cout << "\nEnter Matrix A:" << endl;
+    readMatrix(matrixA, rowsA, colsA);
+
+    cout << "\nOriginal Matrix:" << endl;
+    printMatrix(matrixA, rowsA, colsA);
+
+    // Part A: Transpose
+    int transposed[10][10];
+    transposeMatrix(matrixA, rowsA, colsA, transposed);
+    cout << "\nTransposed Matrix:" << endl;
+    printMatrix(transposed, colsA, rowsA);
+
+    // Part B: Add two matrices
+    int matrixB[10][10];
+    cout << "\nEnter Matrix B (same size as A):" << endl;
+    readMatrix(matrixB, rowsA, colsA);
+
+    int sumResult[10][10];
+    addMatrices(matrixA, matrixB, rowsA, colsA, sumResult);
+    cout << "\nSum of Matrix A and B:" << endl;
+    printMatrix(sumResult, rowsA, colsA);
+
+    // Part C: Multiply two matrices
+    int rowsC, colsC;
+    cout << "\nEnter number of rows for Matrix C: ";
+    cin >> rowsC;
+    cout << "Enter number of columns for Matrix C: ";
+    cin >> colsC;
+
+    if (rowsC != colsA) {
+        cout << "Error: Number of columns in A must equal number of rows in C." << endl;
+        return 0;
+    }
+
+    int matrixC[10][10];
+    cout << "\nEnter Matrix C:" << endl;
+    readMatrix(matrixC, rowsC, colsC);
+
+    int productResult[10][10];
+    multiplyMatrices(matrixA, matrixC, rowsA, colsA, colsC, productResult);
+    cout << "\nProduct of Matrix A and C:" << endl;
+    printMatrix(productResult, rowsA, colsC);
+
+    return 0;
+}
