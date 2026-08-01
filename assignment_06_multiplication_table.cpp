@@ -70,3 +70,29 @@ void printTablesUpToN(int n) {
         cout << "---------------------------" << endl;
     }
 }
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    if (num <= 0) {
+        cout << "Error: Number must be a positive integer." << endl;
+        return 0;
+    }
+
+    printSingleTable(num);
+
+    cout << "\nEnter N for tables from 1 to N: ";
+    int n;
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+        return 0;
+    }
+
+    cout << endl;
+    printTablesUpToN(n);
+
+    return 0;
+}
